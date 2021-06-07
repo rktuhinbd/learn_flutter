@@ -9,6 +9,7 @@ class Home extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          backgroundColor: Colors.amberAccent,
           title: Text(
             'Learn Flutter',
             style: TextStyle(fontSize: 16, color: Colors.white),

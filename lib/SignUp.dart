@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'Profile.dart';
+
 class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String name = '';
+    String email = '';
+    String password = '';
+    String confirmPassword = '';
+
     return Padding(
       padding: EdgeInsets.all(24.0),
       child: Column(
@@ -30,11 +37,14 @@ class SignUp extends StatelessWidget {
                 const Radius.circular(4.0),
               ),
               border: new Border.all(
-                color: Colors.amber,
+                color: Colors.amberAccent,
                 width: 1.0,
               ),
             ),
             child: TextField(
+              onChanged: (newText) {
+                name = newText;
+              },
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Your name',
@@ -56,11 +66,14 @@ class SignUp extends StatelessWidget {
                 const Radius.circular(4.0),
               ),
               border: new Border.all(
-                color: Colors.amber,
+                color: Colors.amberAccent,
                 width: 1.0,
               ),
             ),
             child: TextField(
+              onChanged: (newText) {
+                email = newText;
+              },
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Your email',
@@ -83,12 +96,15 @@ class SignUp extends StatelessWidget {
                 const Radius.circular(4.0),
               ),
               border: new Border.all(
-                color: Colors.amber,
+                color: Colors.amberAccent,
                 width: 1.0,
               ),
             ),
             child: TextField(
               obscureText: true,
+              onChanged: (newText) {
+                password = newText;
+              },
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Password',
@@ -110,12 +126,15 @@ class SignUp extends StatelessWidget {
                 const Radius.circular(4.0),
               ),
               border: new Border.all(
-                color: Colors.amber,
+                color: Colors.amberAccent,
                 width: 1.0,
               ),
             ),
             child: TextField(
               obscureText: true,
+              onChanged: (newText) {
+                confirmPassword = newText;
+              },
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Confirm Password',
@@ -132,7 +151,12 @@ class SignUp extends StatelessWidget {
               height: 48,
               child: new MaterialButton(
                 onPressed: () {
-                  print('Button clicked');
+                  print('Name: ' + name.toString());
+                  print('Email: ' + email.toString());
+                  print('Password: ' + password.toString());
+                  print('Confirm Password: ' + confirmPassword.toString());
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Profile()));
                 },
                 color: Colors.amberAccent,
                 child: Text(
