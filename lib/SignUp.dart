@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-import 'Profile.dart';
+import 'ListExample.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
+  @override
+  _SignUpState createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
-    String name = '';
-    String email = '';
-    String password = '';
-    String confirmPassword = '';
+    TextEditingController nameController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController confirmPasswordController = TextEditingController();
+
+    String name;
+    String email;
+    String password;
+    String confirmPassword;
 
     return Padding(
       padding: EdgeInsets.all(24.0),
@@ -21,7 +32,9 @@ class SignUp extends StatelessWidget {
             'Register to proceed',
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),
+                letterSpacing: 1.25,
+                fontSize: 24,
+                color: Colors.grey.shade900),
           ),
           SizedBox(
             height: 20,
@@ -42,9 +55,10 @@ class SignUp extends StatelessWidget {
               ),
             ),
             child: TextField(
-              onChanged: (newText) {
-                name = newText;
-              },
+              controller: nameController,
+              // onChanged: (newText) {
+              //   name = newText;
+              // },
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Your name',
@@ -71,9 +85,10 @@ class SignUp extends StatelessWidget {
               ),
             ),
             child: TextField(
-              onChanged: (newText) {
-                email = newText;
-              },
+              controller: emailController,
+              // onChanged: (newText) {
+              //   email = newText;
+              // },
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Your email',
@@ -102,9 +117,10 @@ class SignUp extends StatelessWidget {
             ),
             child: TextField(
               obscureText: true,
-              onChanged: (newText) {
-                password = newText;
-              },
+              controller: passwordController,
+              // onChanged: (newText) {
+              //   password = newText;
+              // },
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Password',
@@ -132,9 +148,10 @@ class SignUp extends StatelessWidget {
             ),
             child: TextField(
               obscureText: true,
-              onChanged: (newText) {
-                confirmPassword = newText;
-              },
+              controller: confirmPasswordController,
+              // onChanged: (newText) {
+              //   confirmPassword = newText;
+              // },
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Confirm Password',
@@ -151,12 +168,68 @@ class SignUp extends StatelessWidget {
               height: 48,
               child: new MaterialButton(
                 onPressed: () {
-                  print('Name: ' + name.toString());
-                  print('Email: ' + email.toString());
-                  print('Password: ' + password.toString());
-                  print('Confirm Password: ' + confirmPassword.toString());
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Profile()));
+                  name = nameController.text;
+                  email = emailController.text;
+                  password = passwordController.text;
+                  confirmPassword = confirmPasswordController.text;
+
+                  bool flag = true;
+
+                  if (name.length > 1) {
+                    print('Name: ' + name.toString());
+                  } else {
+                    showToast('Name can\'t be empty');
+                    flag = false;
+                    return;
+                  }
+
+                  if (validateEmail(email)) {
+                    print('Email: ' + email.toString());
+                  } else {
+                    showToast('Email pattern doesn\'t match');
+                    flag = false;
+                    return;
+                  }
+
+                  if (password.length > 5) {
+                    if (validatePassword(password)) {
+                      print('Password: ' + email.toString());
+                    } else {
+                      showToast('Password isn\'t strong enough');
+                      flag = false;
+                      return;
+                    }
+                  } else {
+                    showToast('Password length should be at least 6');
+                    flag = false;
+                    return;
+                  }
+
+                  if (confirmPassword.length > 5) {
+                    if (validatePassword(password)) {
+                      if (password == confirmPassword) {
+                        print(
+                            'Confirm Password: ' + confirmPassword.toString());
+                      } else {
+                        showToast('Both password doesn\'t match');
+                        flag = false;
+                        return;
+                      }
+                    } else {
+                      showToast('Password isn\'t strong enough');
+                      flag = false;
+                      return;
+                    }
+                  } else {
+                    showToast('Password length should be at least 6');
+                    flag = false;
+                    return;
+                  }
+
+                  if (flag) {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ListExample()));
+                  }
                 },
                 color: Colors.amberAccent,
                 child: Text(
@@ -167,5 +240,29 @@ class SignUp extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool validateEmail(String email) {
+    return RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email);
+  }
+
+  bool validatePassword(String password) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(password);
+  }
+
+  void showToast(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        // backgroundColor: Colors.red,
+        // textColor: Colors.white,
+        fontSize: 14.0);
   }
 }
