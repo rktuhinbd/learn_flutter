@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'Home.dart';
-import 'ListExample.dart';
+import 'ChooseLocation.dart';
+import 'Loading.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-        debugShowCheckedModeBanner: false, home: Home());
-  }
-}
+void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/home',
+      routes: {
+        '/': (context) => Loading(),
+        '/home': (context) => Home(),
+        '/location': (context) => ChooseLocation(),
+      },
+      // home: Home())
+    ));
