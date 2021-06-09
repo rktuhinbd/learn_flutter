@@ -45,7 +45,15 @@ class ListExampleState extends State<ListExample> {
         ),
       ),
       body: Column(
-        children: employees.map((employee) => EmployeeListAdapterWidget(employee)).toList(),
+        children: employees
+            .map((employee) => EmployeeListAdapterWidget(
+                employee: employee,
+                delete: () {
+                  setState(() {
+                    employees.remove(employee);
+                  });
+                }))
+            .toList(),
       ),
     );
   }

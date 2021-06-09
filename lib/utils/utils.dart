@@ -16,11 +16,11 @@ bool validatePassword(String password) {
 
 void showToast(String message) {
   Fluttertoast.showToast(
-      msg: "This is Center Short Toast",
+      msg: message,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIos: 1,
       backgroundColor: Colors.amberAccent,
-      textColor: Colors.white,
+      textColor: Colors.black,
       fontSize: 14.0);
 }

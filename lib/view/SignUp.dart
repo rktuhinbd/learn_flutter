@@ -37,131 +37,70 @@ class _SignUpState extends State<SignUp> {
           SizedBox(
             height: 20,
           ),
-          Text('Name'),
-          SizedBox(
-            height: 8,
-          ),
-          Container(
-            decoration: new BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(4.0),
-              ),
-              border: new Border.all(
-                color: Colors.amberAccent,
-                width: 1.0,
-              ),
-            ),
-            child: TextField(
-              controller: nameController,
-              // onChanged: (newText) {
-              //   name = newText;
-              // },
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Your name',
-                  floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
-            ),
+          TextField(
+            controller: nameController,
+            // onChanged: (newText) {
+            //   name = newText;
+            // },
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Full Name',
+                hintText: 'Full Name',
+                floatingLabelBehavior: FloatingLabelBehavior.auto,
+                contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
           ),
           SizedBox(
-            height: 12,
+            height: 16,
           ),
-          Text('Email'),
-          SizedBox(
-            height: 8,
-          ),
-          Container(
-            decoration: new BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(4.0),
-              ),
-              border: new Border.all(
-                color: Colors.amberAccent,
-                width: 1.0,
-              ),
-            ),
-            child: TextField(
-              controller: emailController,
-              // onChanged: (newText) {
-              //   email = newText;
-              // },
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Your email',
-                  suffixText: '@gmail.com',
-                  floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
-            ),
+          TextField(
+            controller: emailController,
+            // onChanged: (newText) {
+            //   email = newText;
+            // },
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Email Address',
+                labelText: 'Email Address',
+                suffixText: '@gmail.com',
+                floatingLabelBehavior: FloatingLabelBehavior.auto,
+                contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
           ),
           SizedBox(
-            height: 12,
+            height: 16,
           ),
-          Text('Password'),
-          SizedBox(
-            height: 8,
-          ),
-          Container(
-            decoration: new BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(4.0),
-              ),
-              border: new Border.all(
-                color: Colors.amberAccent,
-                width: 1.0,
-              ),
-            ),
-            child: TextField(
-              obscureText: true,
-              controller: passwordController,
-              // onChanged: (newText) {
-              //   password = newText;
-              // },
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Password',
-                  floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
-            ),
+          TextField(
+            obscureText: true,
+            controller: passwordController,
+            // onChanged: (newText) {
+            //   password = newText;
+            // },
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Password',
+                labelText: 'Password',
+                floatingLabelBehavior: FloatingLabelBehavior.auto,
+                contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
           ),
           SizedBox(
-            height: 12,
+            height: 16,
           ),
-          Text('Confirm Password'),
-          SizedBox(
-            height: 8,
-          ),
-          Container(
-            decoration: new BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(4.0),
-              ),
-              border: new Border.all(
-                color: Colors.amberAccent,
-                width: 1.0,
-              ),
-            ),
-            child: TextField(
-              obscureText: true,
-              controller: confirmPasswordController,
-              // onChanged: (newText) {
-              //   confirmPassword = newText;
-              // },
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Confirm Password',
-                  floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
-            ),
+          TextField(
+            obscureText: true,
+            controller: confirmPasswordController,
+            // onChanged: (newText) {
+            //   confirmPassword = newText;
+            // },
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Confirm Password',
+                labelText: 'Confirm Password',
+                floatingLabelBehavior: FloatingLabelBehavior.auto,
+                contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
           ),
           SizedBox(
             height: 24,
           ),
           Container(
-              // margin: EdgeInsets.symmetric(horizontal: 20),
               width: double.infinity,
               height: 48,
               child: new MaterialButton(
