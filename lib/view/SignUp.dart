@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:learn_flutter/utils/utils.dart';
 
 import 'ListExample.dart';
 
@@ -32,9 +32,7 @@ class _SignUpState extends State<SignUp> {
             'Register to proceed',
             textAlign: TextAlign.center,
             style: TextStyle(
-                letterSpacing: 1.25,
-                fontSize: 24,
-                color: Colors.grey.shade900),
+                letterSpacing: 1.25, fontSize: 24, color: Colors.grey.shade900),
           ),
           SizedBox(
             height: 20,
@@ -239,31 +237,6 @@ class _SignUpState extends State<SignUp> {
               ))
         ],
       ),
-    );
-  }
-
-  bool validateEmail(String email) {
-    return RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email);
-  }
-
-  bool validatePassword(String password) {
-    String pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-    RegExp regExp = new RegExp(pattern);
-    return regExp.hasMatch(password);
-  }
-
-  void showToast(String message) {
-    Fluttertoast.showToast(
-        msg: "This is Center Short Toast",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIos: 1,
-        backgroundColor: Colors.amberAccent,
-        textColor: Colors.white,
-        fontSize: 14.0
     );
   }
 }
