@@ -257,12 +257,13 @@ class _SignUpState extends State<SignUp> {
 
   void showToast(String message) {
     Fluttertoast.showToast(
-        msg: message,
+        msg: "This is Center Short Toast",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        // backgroundColor: Colors.red,
-        // textColor: Colors.white,
-        fontSize: 14.0);
+        timeInSecForIos: 1,
+        backgroundColor: Colors.amberAccent,
+        textColor: Colors.white,
+        fontSize: 14.0
+    );
   }
 }

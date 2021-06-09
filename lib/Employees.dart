@@ -6,6 +6,6 @@ class Employees{
   String email;
   String dob;
 
-  Employees({required this.name, required this.designation, required this.phone, required this.email, required this.dob});
+  Employees({this.name, this.designation, this.phone, this.email, this.dob});
 
 }
