@@ -14,7 +14,7 @@ class _LoadingState extends State<Loading> {
 
   void getCurrentTime() async {
     WorldTime instance =
-        WorldTime(location: location, flag: flag, url: 'Dhaka,%20Bangladesh');
+    WorldTime(location: location, flag: flag, url: 'Dhaka,%20Bangladesh');
 
     await instance.getTime();
 
@@ -24,8 +24,9 @@ class _LoadingState extends State<Loading> {
       print(time);
 
       if (time != null) {
-        Navigator.pushReplacementNamed(context, '/home',
-            arguments: {'location': location, 'flag': flag, 'time': time});
+        // Navigator.pushReplacementNamed(context, '/Home',
+        //     arguments: {'location': location, 'flag': flag, 'time': time});
+        Navigator.pushReplacementNamed(context, '/SignUp');
       }
     });
   }
