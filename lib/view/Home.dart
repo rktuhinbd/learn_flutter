@@ -35,7 +35,10 @@ class Home extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, '/location');
                     },
-                    icon: Icon(Icons.edit_location),
+                    icon: Icon(
+                      Icons.edit_location,
+                      color: Colors.grey.shade500,
+                    ),
                     label: Text(
                       'Edit Location',
                       style:
