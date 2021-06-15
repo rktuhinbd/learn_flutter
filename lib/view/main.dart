@@ -7,11 +7,11 @@ import 'Loading.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/signup',
+      initialRoute: '/',
       routes: {
         '/signup': (context) => SignUp(),
-        // '/': (context) => Loading(),
-        // '/home': (context) => Home(),
-        // '/location': (context) => ChooseLocation(),
+        '/': (context) => Loading(),
+        '/home': (context) => Home(),
+        '/location': (context) => ChooseLocation(),
       },
     ));

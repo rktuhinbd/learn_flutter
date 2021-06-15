@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:learn_flutter/services/WorldTime.dart';
 
 class Loading extends StatefulWidget {
@@ -7,27 +8,25 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-
   String time;
   String location = 'Dhaka, Bangladesh';
   String flag = 'bangladesh.png';
 
   void getCurrentTime() async {
-    WorldTime instance = WorldTime(
-        location: location,
-        flag: flag,
-        url: 'Dhaka,%20Bangladesh');
+    WorldTime instance =
+        WorldTime(location: location, flag: flag, url: 'Dhaka,%20Bangladesh');
 
     await instance.getTime();
-    // showToast('Current date & time updated!');
 
     setState(() {
       time = instance.dateTime;
-      Navigator.pushReplacementNamed(context, '/home', arguments: {
-        'location': location,
-        'flag': flag,
-        'time': time
-      });
+
+      print(time);
+
+      if (time != null) {
+        Navigator.pushReplacementNamed(context, '/home',
+            arguments: {'location': location, 'flag': flag, 'time': time});
+      }
     });
   }
 
@@ -40,17 +39,12 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.black,
         body: Center(
-      child: Padding(
-        padding: const EdgeInsets.all(40.0),
-        child: Text(
-          'Loading . . .',
-          style: TextStyle(
-              fontSize: 20,
-              color: Colors.redAccent,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
-    ));
+          child: SpinKitFadingCircle(
+            color: Colors.amberAccent,
+            size: 80.0,
+          ),
+        ));
   }
 }
