@@ -39,7 +39,6 @@ String validateEmail(String value) {
 
 /// Password validation
 String validatePassword(String value, String password, bool validateConfirm) {
-  print("Password: $password + Confirm Password: $value");
 
   String pattern =
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:learn_flutter/utils/utils.dart';
 import 'package:learn_flutter/utils/validation.dart';
 
 class SignUp extends StatefulWidget {
@@ -30,6 +31,7 @@ class _SignUpState extends State<SignUp> {
         padding: EdgeInsets.fromLTRB(24.0, 48.0, 24.0, 0),
         child: Form(
           key: formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -153,9 +155,9 @@ class _SignUpState extends State<SignUp> {
                       print("Password 1: " + passwordController.text);
                       print("Password 2: " + confirmPasswordController.text);
                       if (formKey.currentState.validate()) {
-                        print("Validation Completed.");
+                        showToast("Validation Completed.");
                       } else
-                        print("Validation Incomplete!");
+                        showToast("Validation Incomplete!");
                     },
                     color: Colors.amberAccent,
                     child: Text(
