@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:learn_flutter/utils/utils.dart';
-import 'package:validators/validators.dart';
+import 'package:learn_flutter/utils/validation.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -15,20 +15,23 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     TextEditingController nameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
+    TextEditingController phoneController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController confirmPasswordController = TextEditingController();
 
     String name;
     String email;
+    String phone;
     String password;
     String confirmPassword;
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: EdgeInsets.fromLTRB(24.0, 48.0, 24.0, 0),
         child: Form(
           key: formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -46,21 +49,17 @@ class _SignUpState extends State<SignUp> {
               ),
               TextFormField(
                 controller: nameController,
-                onChanged: (value) {
-                  formKey.currentState.validate();
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.text,
+                validator: (value) => validateName(value),
+                onChanged: (value) => {name = value},
+                onSaved: (String value) {
+                  name = value;
                 },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Enter full name';
-                  } else {
-                    return null;
-                  }
-                },
-                onSaved: (value) => setState(() => name = value),
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.account_box_sharp),
                     labelText: 'Full Name',
-                    hintText: 'Full Name',
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                     contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
               ),
@@ -69,16 +68,36 @@ class _SignUpState extends State<SignUp> {
               ),
               TextFormField(
                 controller: emailController,
-                onChanged: (value) {
-                  formKey.currentState.validate();
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                validator: (value) => validateEmail(value),
+                onChanged: (value) => {email = value},
+                onSaved: (String value) {
+                  email = value;
                 },
-                validator: (val) => !isEmail(val) ? "Invalid Email" : null,
-                onSaved: (value) => setState(() => email = value),
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Email Address',
+                    prefixIcon: Icon(Icons.email),
                     labelText: 'Email Address',
-                    suffixText: '@gmail.com',
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                controller: phoneController,
+                keyboardType: TextInputType.phone,
+                textInputAction: TextInputAction.next,
+                validator: (value) => validatePhone(value),
+                onChanged: (value) => {phone = value},
+                onSaved: (String value) {
+                  phone = value;
+                },
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.phone),
+                    labelText: 'Phone Number',
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                     contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
               ),
@@ -88,24 +107,16 @@ class _SignUpState extends State<SignUp> {
               TextFormField(
                 obscureText: true,
                 controller: passwordController,
-                onChanged: (value) {
-                  formKey.currentState.validate();
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                onChanged: (value) => {password = value},
+                onSaved: (String value) {
+                  password = value;
                 },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Enter password';
-                  } else if (value.length < 6) {
-                    return 'Password can\'t be less than 6 characters';
-                  } else if (validatePassword(value)) {
-                    return 'Please provide a strong password';
-                  } else {
-                    return null;
-                  }
-                },
-                onSaved: (value) => setState(() => password = value),
+                validator: (value) => validatePassword(value, null, false),
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Password',
+                    prefixIcon: Icon(Icons.lock),
                     labelText: 'Password',
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                     contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
@@ -116,26 +127,16 @@ class _SignUpState extends State<SignUp> {
               TextFormField(
                 obscureText: true,
                 controller: confirmPasswordController,
-                onSaved: (value) => setState(() => confirmPassword = value),
-                onChanged: (value) {
-                  formKey.currentState.validate();
+                textInputAction: TextInputAction.done,
+                keyboardType: TextInputType.text,
+                onChanged: (value) => {confirmPassword = value},
+                onSaved: (String value) {
+                  confirmPassword = value;
                 },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Enter password';
-                  } else if (value.length < 6) {
-                    return 'Password can\'t be less than 6 characters';
-                  } else if (validatePassword(value)) {
-                    return 'Please provide a strong password';
-                  } else if (confirmPassword != password) {
-                    return 'Confirm password not matched';
-                  } else {
-                    return null;
-                  }
-                },
+                validator: (value) => validatePassword(value, password, true),
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Confirm Password',
+                    prefixIcon: Icon(Icons.lock),
                     labelText: 'Confirm Password',
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                     contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0)),
@@ -148,15 +149,15 @@ class _SignUpState extends State<SignUp> {
                   height: 48,
                   child: new MaterialButton(
                     onPressed: () {
-                      name = nameController.text;
-                      email = emailController.text;
-                      password = passwordController.text;
-                      confirmPassword = confirmPasswordController.text;
-
-                      // if (flag) {
-                      //   Navigator.of(context).push(MaterialPageRoute(
-                      //       builder: (context) => ListExample()));
-                      // }
+                      print("Name: " + nameController.text);
+                      print("Email: " + emailController.text);
+                      print("Phone: " + phoneController.text);
+                      print("Password 1: " + passwordController.text);
+                      print("Password 2: " + confirmPasswordController.text);
+                      if (formKey.currentState.validate()) {
+                        showToast("Validation Completed.");
+                      } else
+                        showToast("Validation Incomplete!");
                     },
                     color: Colors.amberAccent,
                     child: Text(
